@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './signup.css'
-import SessionHeader from '../../components/SessionHeader';
-
-/* 
-- focus on styling the signup form
-- Functionality
-*/
+import SessionHeader from '../../components/session/SessionHeader';
+import back from '../../assets/back.png'
 
 const Signup = () => {
+
+  useEffect(() => {
+    document.title = 'Signup | Register'
+  }, [])
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -32,14 +32,18 @@ const Signup = () => {
   return (
     <section>
       <SessionHeader />
-      <form onSubmit={handleSubmit} className='flex flex-col h-screen items-center'>
-        <div>
+      <form onSubmit={handleSubmit} className='signup-form'>
+        <span className='signup-back-button-container'>
+          <img className='signup-back-button' src={back} alt='back-button' />
+        </span>
+        <p className='font-bold text-xl'>Registration</p>
+        <div className='signup-firstname-container'>
           <label htmlFor='firstName'></label>
           <input 
             id='firstName'
             type='text'
             name='firstName'
-            placeholder='enter your first name'
+            placeholder='First name'
             value={formData.firstName}
             onChange={handleInputChange}
             required 
@@ -52,8 +56,21 @@ const Signup = () => {
             id='lastName'
             type='text'
             name='lastName'
-            placeholder='enter your last name'
+            placeholder='Last name'
             value={formData.lastName}
+            onChange={handleInputChange}
+            required 
+          />
+        </div>
+
+        <div>
+          <label htmlFor='email'></label>
+          <input 
+            id='email'
+            type='text'
+            name='email'
+            placeholder='Email'
+            value={formData.email}
             onChange={handleInputChange}
             required 
           />
@@ -65,7 +82,7 @@ const Signup = () => {
             id='password'
             type='password'
             name='password'
-            placeholder='enter a 6 character password'
+            placeholder='Password'
             value={formData.password}
             onChange={handleInputChange}
             required 
@@ -78,14 +95,23 @@ const Signup = () => {
             id='passwordConfirmation'
             type='password'
             name='passwordConfirmation'
-            placeholder='confirm password'
+            placeholder='Confirm password'
             value={formData.passwordConfirmation}
             onChange={handleInputChange}
             required 
           />
         </div>
 
-        <button type='submit'>Submit</button>
+        <div className='password-guide'>
+          <h5 className='text-xs font-bold mb-1'>Your password must:</h5>
+          <ul className="list-disc pl-4">
+            <li className='text-xs'>Have between 6 and 56 charcters</li>
+            <li className='text-xs'>Contain at least 1 uppercase and 1 lowercase character</li>
+            <li className='text-xs'>Be different from your email address</li>
+          </ul>
+        </div>
+
+        <button className='signup-submit-button' type='submit'>Sign Up</button>
       </form>
     </section>
   )
