@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import './signup.css'
-import SessionHeader from '../../components/session/SessionHeader';
+import './styles/signup.css'
+import SessionHeader from './SessionHeader';
 import back from '../../assets/back.png'
 
 const Signup = () => {
