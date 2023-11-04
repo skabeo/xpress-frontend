@@ -12,6 +12,7 @@ const Signup = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -28,9 +29,25 @@ const Signup = () => {
     }))
   }
 
+  const errorMessages = () => {
+    const specialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
+
+    if (formData.password !== formData.passwordConfirmation) {
+      setErrorMessage('Password do not match')
+    } else if (!specialChar.test(formData.password)) {
+      setErrorMessage('Password must contain at least one special character')
+    } else if (formData.email === formData.password) {
+      setErrorMessage('Password should not be the same as email')
+    } else if (formData.password.length < 6 ) {
+      setErrorMessage('Password should have at least 6 characters')
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    errorMessages()
   }
+  
 
   return (
     <section>
@@ -40,6 +57,7 @@ const Signup = () => {
           <img className='signup-back-button' src={back} alt='back-button' />
         </span>
         <p className='font-bold text-xl'>Registration</p>
+        {errorMessage && <p className='signup-error-message'>{errorMessage}</p>}
         <div className='signup-firstname-container'>
           <label htmlFor='firstName'></label>
           <input 
@@ -120,8 +138,8 @@ const Signup = () => {
         <div className='password-guide'>
           <h5 className='text-xs font-bold mb-1'>Your password must:</h5>
           <ul className="list-disc pl-4">
-            <li className='text-xs'>Have between 6 and 56 charcters</li>
-            <li className='text-xs'>Contain at least 1 uppercase and 1 lowercase character</li>
+            <li className='text-xs'>Have between 6 and 20 charcters</li>
+            <li className='text-xs'>Contain at least 1 special charcter</li>
             <li className='text-xs'>Be different from your email address</li>
           </ul>
         </div>
