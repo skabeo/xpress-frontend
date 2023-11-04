@@ -50,3 +50,13 @@
   margin-top: 20px;
   background-color: rgb(242, 242, 242) !important;
 }
+
+.signup-password-container {
+  position: relative;
+}
+
+.signup-password-icon {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+}

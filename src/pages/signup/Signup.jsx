@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './signup.css'
 import SessionHeader from '../../components/session/SessionHeader';
 import back from '../../assets/back.png'
@@ -9,6 +10,8 @@ const Signup = () => {
     document.title = 'Signup | Register'
   }, [])
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -76,30 +79,42 @@ const Signup = () => {
           />
         </div>
 
-        <div>
+        <div className='signup-password-container'>
           <label htmlFor='password'></label>
           <input 
             id='password'
-            type='password'
+            type={ showPassword ? 'text' : 'password' }
             name='password'
             placeholder='Password'
             value={formData.password}
             onChange={handleInputChange}
             required 
           />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className='signup-password-icon'
+          >
+            {showPassword ? <FaEye /> : <FaEyeSlash />}
+          </span> 
         </div>
 
-        <div>
+        <div className='signup-password-container'>
           <label htmlFor='passwordConfirmation'></label>
           <input 
             id='passwordConfirmation'
-            type='password'
+            type={showPasswordConfirmation ? 'text' : 'password'}
             name='passwordConfirmation'
             placeholder='Confirm password'
             value={formData.passwordConfirmation}
             onChange={handleInputChange}
             required 
           />
+          <span
+            onClick={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
+            className='signup-password-icon'
+          >
+            {showPasswordConfirmation ? <FaEye /> : <FaEyeSlash />}
+          </span> 
         </div>
 
         <div className='password-guide'>
