@@ -1,13 +1,16 @@
-.signup-form {
+.signup-section-container {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
   max-width: 504px;
+  padding: 20px;
+}
+
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
 }
 
 .signup-form div input {
@@ -21,20 +24,19 @@
   outline: 1px solid;
 }
 
-.signup-back-button {
-  width: 100%;
-}
-
 .signup-back-button-container {
-  width: 38px;
-  height: 38px;
-  padding: 7px;
-  border-radius: 50%;
   cursor: pointer;
   transition: all 0.25s;
 }
 
-.signup-back-button-container:hover {
+.signup-back-button {
+  width: 38px;
+  height: 38px;
+  padding: 7px;
+  border-radius: 50%;
+}
+
+.signup-back-button:hover {
   background-color: rgb(233, 233, 233);
 }
 
