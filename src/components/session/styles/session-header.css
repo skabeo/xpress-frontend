@@ -1,0 +1,11 @@
+.x-color {
+  color: #f6e204;
+  font-size: 3rem;
+  font-style: italic;
+}
+
+.session-header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
