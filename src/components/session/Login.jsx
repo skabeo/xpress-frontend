@@ -4,12 +4,15 @@ import './styles/login.css'
 import { Link } from 'react-router-dom'
 import { FaEye, FaEyeSlash} from 'react-icons/fa'
 
+// show 'incorect email or password when sign in button is clicked'
+
 const Login = () => {
 
   useEffect(() => {
     document.title = 'Login | Log into your account'
   }, [])
 
+  const [errorMessages, setErrorMessages] = useState('')
   const [showPasword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -24,12 +27,18 @@ const Login = () => {
     }))
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrorMessages('Invalid Email or password')
+  }
+
   return (
     <section>
       <SessionHeader />
       <div className='login-container'>
         <h4 className='font-bold text-xl mb-4'>Sign into your account</h4>
-        <form className='login-form-container'>
+        {errorMessages && <li className='list-disc pl-2 mb-4 signup-error-message'>{errorMessages}</li>}
+        <form className='login-form-container' onSubmit={handleSubmit}>
           <div className=''>
             <label htmlFor='email'></label>
             <input 
