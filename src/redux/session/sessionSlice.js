@@ -16,7 +16,7 @@ export const sessionSlice = createSlice({
   name: 'sessions',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: () => {},
 });
 
 export default sessionSlice.reducer;
