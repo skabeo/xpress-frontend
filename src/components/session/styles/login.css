@@ -1,0 +1,85 @@
+.login-container {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 8px 28px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  max-width: 504px;
+  padding: 20px 25px;
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-form-container div input {
+  padding: 12px 13px;
+  border-radius: 5px;
+  width: 100%;
+  outline: 1px solid rgb(134, 134, 134);
+}
+
+.login-form-container div input:hover {
+  outline: 1px solid;
+}
+
+.login-button {
+  background: linear-gradient(135deg, #53edc6, #1b725c 100%, #63c0a8) !important;
+  padding: 12px 0;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: white;
+}
+
+.horizontal-line-container {
+  margin-top: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-line {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.or-text {
+  margin: 0 10px;
+  color: #777;
+}
+
+.optional-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sign-up {
+  font-weight: bold;
+  font-family: inherit;
+  background-color: inherit;
+  border: none;
+  padding: 13px 10px;
+  outline: 1px solid #35977e;
+  border-radius: 5px;
+  width: 100%;
+  color: #35977e;
+  transition: all 0.25s;
+}
+
+.sign-up:hover {
+  background-color: #d7f3ec;
+}
+
+.login-password-container {
+  position: relative;
+}
+
+.login-password-icon {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+}

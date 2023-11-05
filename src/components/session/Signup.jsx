@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import './signup.css'
-import SessionHeader from '../../components/session/SessionHeader';
+import './styles/signup.css'
+import SessionHeader from './SessionHeader';
 import back from '../../assets/back.png'
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
 
@@ -57,14 +58,15 @@ const Signup = () => {
     const errors = errorMessages()
     setErrorMessage(errors)
   }
-  
 
   return (
     <section >
       <SessionHeader />
       <div className='signup-section-container'>
         <span className='signup-back-button-container'>
-          <img className='signup-back-button' src={back} alt='back-button' />
+          <Link to='/login'>
+            <img className='signup-back-button' src={back} alt='back-button' />
+          </Link>
         </span>
         <p className='font-bold text-xl my-4'>Registration</p>
         <ul className='list-disc pl-4'>
