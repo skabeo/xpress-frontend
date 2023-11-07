@@ -36,14 +36,15 @@ export const sessionSlice = createSlice({
         state.error = false;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
-        console/log(action)
+        const { data } = action.payload;
+        console.log(data)
         state.loading = false;
         state.currentUser = {
-          id: action.payload.id,
-          firstName: action.payload.first_name,
-          lastName: action.payload.last_name,
-          email: action.payload.email,
-          role: action.payload.role,
+          id: data.id,
+          firstName: data.first_name,
+          lastName: data.last_name,
+          email: data.email,
+          role: data.role,
         }
         state.error = false;
       })
