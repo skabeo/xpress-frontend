@@ -4,8 +4,11 @@ import './styles/signup.css'
 import SessionHeader from './SessionHeader';
 import back from '../../assets/back.png'
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signupUser } from '../../redux/session/sessionSlice';
 
 const Signup = () => {
+  const dispatch = useDispatch()
 
   useEffect(() => {
     document.title = 'Signup | Register'
@@ -53,10 +56,27 @@ const Signup = () => {
     return errors;
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const errors = errorMessages()
-    setErrorMessage(errors)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const errors = errorMessages();
+    setErrorMessage([])
+
+    const payload = {
+      user: {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+      }
+    }
+
+    // console.log(payload)
+
+    if (errors.length === 0) {
+      await dispatch(signupUser(payload))
+    } else {
+      setErrorMessage(errors)
+    }
   }
 
   return (
