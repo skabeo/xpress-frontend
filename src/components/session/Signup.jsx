@@ -3,12 +3,17 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './styles/signup.css'
 import SessionHeader from './SessionHeader';
 import back from '../../assets/back.png'
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../redux/session/sessionSlice';
 
+// FUTURE TODO
+// navigate to home page when sign up is successfull-- improve the logic
+// add a signing up to sign up buton when loading state is true
+
 const Signup = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Signup | Register'
@@ -70,10 +75,9 @@ const Signup = () => {
       }
     }
 
-    // console.log(payload)
-
     if (errors.length === 0) {
       await dispatch(signupUser(payload))
+      navigate('/')
     } else {
       setErrorMessage(errors)
     }

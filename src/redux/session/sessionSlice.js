@@ -20,7 +20,6 @@ export const signupUser = createAsyncThunk(
     if (response.error) {
       return rejectWithValue(response);
     }
-    console.log(response)
     return response;
   }
 )
@@ -37,7 +36,6 @@ export const sessionSlice = createSlice({
       })
       .addCase(signupUser.fulfilled, (state, action) => {
         const { data } = action.payload;
-        console.log(data)
         state.loading = false;
         state.currentUser = {
           id: data.id,
