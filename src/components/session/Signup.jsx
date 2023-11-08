@@ -9,6 +9,7 @@ import { signupUser } from '../../redux/session/sessionSlice';
 
 // FUTURE TODO
 // navigate to home page when sign up is successfull-- improve the logic
+// detailed
 // add a signing up to sign up buton when loading state is true
 
 const Signup = () => {
