@@ -46,6 +46,10 @@ export const sessionSlice = createSlice({
         }
         state.error = false;
       })
+      .addCase(signupUser.rejected, (state) => {
+        state.loading = false;
+        state.error = 'Signup not successful'
+      })
   },
 });
 
