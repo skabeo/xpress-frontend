@@ -4,7 +4,7 @@ import './styles/signup.css'
 import SessionHeader from './SessionHeader';
 import back from '../../assets/back.png'
 import { useNavigate,Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from '../../redux/session/sessionSlice';
 import axios from 'axios';
 
@@ -22,6 +22,7 @@ const Signup = () => {
     document.title = 'Signup | Register'
   }, [])
 
+  const { isLoading } = useSelector((state) => state.session);
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -91,7 +92,6 @@ const Signup = () => {
   const handleSubmit = async (e) => { 
     e.preventDefault();
     const errors = errorMessages();
-    setIsSigningIn(true);
     setErrorMessage([])
 
     const payload = {
@@ -105,22 +105,17 @@ const Signup = () => {
 
     try {
       if (errors.length === 0) {
-        const response = await axios.post('http://127.0.0.1:3000/api/v1/auth/signup', payload);
-        console.log(response);
-        setTimeout(() => {
-
-          navigate('/')
-        }, 3000)
+        // const response = await axios.post('http://127.0.0.1:3000/api/v1/auth/signup', payload);
+        // console.log(response);
+        dispatch(signupUser(payload));
+        navigate('/')
         // return response;
       } else {
         setErrorMessage(errors)
       }
     } catch(error) {
       console.log(error)
-    } finally {
-      setIsSigningIn(false);
     }
-
   }
 
   return (
@@ -230,10 +225,10 @@ const Signup = () => {
           <button
             className='signup-submit-button' 
             type='submit'
-            disabled={isSigningIn} 
-            style={{ cursor: isSigningIn ? 'not-allowed' : 'pointer' }}
+            disabled={isLoading} 
+            style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
           >
-            {isSigningIn ? 'Signing In...' : 'Sign In'}
+            {isLoading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
       </div>
