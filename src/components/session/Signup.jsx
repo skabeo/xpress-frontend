@@ -6,6 +6,7 @@ import back from '../../assets/back.png'
 import { useNavigate,Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../redux/session/sessionSlice';
+import axios from 'axios';
 
 // FUTURE TODO
 // navigate to home page when sign up is successfull-- improve the logic
@@ -24,6 +25,8 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [isSigningIn, setIsSigningIn] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -63,9 +66,32 @@ const Signup = () => {
     return errors;
   }
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const errors = errorMessages();
+  //   setErrorMessage([])
+
+  //   const payload = {
+  //     user: {
+  //       first_name: formData.firstName,
+  //       last_name: formData.lastName,
+  //       email: formData.email,
+  //       password: formData.password,
+  //     }
+  //   }
+
+  //   if (errors.length === 0) {
+  //     await dispatch(signupUser(payload))
+  //     navigate('/')
+  //   } else {
+  //     setErrorMessage(errors)
+  //   }
+  // }
+
+  const handleSubmit = async (e) => { 
     e.preventDefault();
     const errors = errorMessages();
+    setIsSigningIn(true);
     setErrorMessage([])
 
     const payload = {
@@ -77,12 +103,24 @@ const Signup = () => {
       }
     }
 
-    if (errors.length === 0) {
-      await dispatch(signupUser(payload))
-      navigate('/')
-    } else {
-      setErrorMessage(errors)
+    try {
+      if (errors.length === 0) {
+        const response = await axios.post('http://127.0.0.1:3000/api/v1/auth/signup', payload);
+        console.log(response);
+        setTimeout(() => {
+
+          navigate('/')
+        }, 3000)
+        // return response;
+      } else {
+        setErrorMessage(errors)
+      }
+    } catch(error) {
+      console.log(error)
+    } finally {
+      setIsSigningIn(false);
     }
+
   }
 
   return (
@@ -187,7 +225,16 @@ const Signup = () => {
             </ul>
           </div>
 
-          <button className='signup-submit-button' type='submit'>Sign Up</button>
+          {/* <button className='signup-submit-button' type='submit'>Sign Up</button> */}
+
+          <button
+            className='signup-submit-button' 
+            type='submit'
+            disabled={isSigningIn} 
+            style={{ cursor: isSigningIn ? 'not-allowed' : 'pointer' }}
+          >
+            {isSigningIn ? 'Signing In...' : 'Sign In'}
+          </button>
         </form>
       </div>
     </section>
