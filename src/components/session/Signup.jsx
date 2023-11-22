@@ -6,13 +6,7 @@ import back from '../../assets/back.png'
 import { useNavigate,Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from '../../redux/session/sessionSlice';
-import axios from 'axios';
-
-// FUTURE TODO
-// navigate to home page when sign up is successfull-- improve the logic
-// detailed
-// really
-// add a signing up to sign up buton when loading state is true
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const Signup = () => {
   const dispatch = useDispatch()
@@ -22,11 +16,10 @@ const Signup = () => {
     document.title = 'Signup | Register'
   }, [])
 
-  const { isLoading } = useSelector((state) => state.session);
+  const { isLoading, error } = useSelector((state) => state.session);
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -67,28 +60,6 @@ const Signup = () => {
     return errors;
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const errors = errorMessages();
-  //   setErrorMessage([])
-
-  //   const payload = {
-  //     user: {
-  //       first_name: formData.firstName,
-  //       last_name: formData.lastName,
-  //       email: formData.email,
-  //       password: formData.password,
-  //     }
-  //   }
-
-  //   if (errors.length === 0) {
-  //     await dispatch(signupUser(payload))
-  //     navigate('/')
-  //   } else {
-  //     setErrorMessage(errors)
-  //   }
-  // }
-
   const handleSubmit = async (e) => { 
     e.preventDefault();
     const errors = errorMessages();
@@ -104,27 +75,16 @@ const Signup = () => {
     }
 
     if (errors.length === 0) {
-      dispatch(signupUser(payload));
-      setTimeout(() => {
-        navigate('/')
-      }, 5000)
+      try {
+        const resultAction = await dispatch(signupUser(payload));
+        const result = unwrapResult(resultAction);
+        navigate('/');
+      } catch(error) {
+        throw error;
+      }
     } else {
       setErrorMessage(errors)
     }
-
-    // try {
-    //   if (errors.length === 0) {
-    //     // const response = await axios.post('http://127.0.0.1:3000/api/v1/auth/signup', payload);
-    //     // console.log(response);
-    //     dispatch(signupUser(payload));
-    //     navigate('/')
-    //     // return response;
-    //   } else {
-    //     setErrorMessage(errors)
-    //   }
-    // } catch(error) {
-    //   console.log(error)
-    // }
   }
 
   return (
@@ -141,6 +101,7 @@ const Signup = () => {
           {errorMessage ? errorMessage.map((error, index) => (
             <li key={index} className='signup-error-message'>{error}</li>
           )) : null}
+          {error && <p className='signup-error-message'>{error}</p>}
         </ul>
         <form onSubmit={handleSubmit} className='signup-form'>
           <div className='signup-firstname-container mt-3'>
@@ -229,15 +190,13 @@ const Signup = () => {
             </ul>
           </div>
 
-          {/* <button className='signup-submit-button' type='submit'>Sign Up</button> */}
-
           <button
             className='signup-submit-button' 
             type='submit'
             disabled={isLoading} 
             style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
           >
-            {isLoading ? 'Signing In...' : 'Sign In'}
+            {isLoading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>
       </div>

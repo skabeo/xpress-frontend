@@ -16,17 +16,6 @@ const initialState = {
   error: null
 }
 
-// export const signupUser = createAsyncThunk(
-//   'session/signupUser',
-//   async (payload, { rejectWithValue }) => {
-//     const response = await createUser(payload);
-//     if (response.error) {
-//       return rejectWithValue(response);
-//     }
-//     return response;
-//   }
-// )
-
 export const signupUser = createAsyncThunk('session/signupUser', async (payload) => {
   try {
     const response = await axios.post(`${BASE_URL}/signup`, payload);
@@ -60,7 +49,7 @@ export const sessionSlice = createSlice({
       })
       .addCase(signupUser.rejected, (state) => {
         state.isLoading = false;
-        state.error = 'Signup not successful'
+        state.error = 'An error occurred during signup'
       })
   },
 });
