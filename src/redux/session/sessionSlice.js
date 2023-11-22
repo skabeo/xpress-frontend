@@ -29,8 +29,7 @@ const initialState = {
 
 export const signupUser = createAsyncThunk('session/signupUser', async (payload) => {
   try {
-    const response = axios.post(`${BASE_URL}/signup`, payload);
-    console.log(response.data);
+    const response = await axios.post(`${BASE_URL}/signup`, payload);
     return response.data
   } catch(error) {
     throw error;

@@ -103,19 +103,28 @@ const Signup = () => {
       }
     }
 
-    try {
-      if (errors.length === 0) {
-        // const response = await axios.post('http://127.0.0.1:3000/api/v1/auth/signup', payload);
-        // console.log(response);
-        dispatch(signupUser(payload));
+    if (errors.length === 0) {
+      dispatch(signupUser(payload));
+      setTimeout(() => {
         navigate('/')
-        // return response;
-      } else {
-        setErrorMessage(errors)
-      }
-    } catch(error) {
-      console.log(error)
+      }, 5000)
+    } else {
+      setErrorMessage(errors)
     }
+
+    // try {
+    //   if (errors.length === 0) {
+    //     // const response = await axios.post('http://127.0.0.1:3000/api/v1/auth/signup', payload);
+    //     // console.log(response);
+    //     dispatch(signupUser(payload));
+    //     navigate('/')
+    //     // return response;
+    //   } else {
+    //     setErrorMessage(errors)
+    //   }
+    // } catch(error) {
+    //   console.log(error)
+    // }
   }
 
   return (
