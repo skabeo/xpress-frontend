@@ -14,9 +14,8 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading } = useSelector((state) => state.session)
+  const { isLoading, error } = useSelector((state) => state.session)
 
-  const [errorMessages, setErrorMessages] = useState('')
   const [showPasword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -33,7 +32,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setErrorMessages('Invalid Email or password')
     const payload = {
       user: {
         email: formData.email,
@@ -42,8 +40,12 @@ const Login = () => {
     }
 
     try {
-      await dispatch(loginUser(payload));
-      navigate('/')
+      const response = await dispatch(loginUser(payload));
+      if(response.error) {
+        return
+      } else {
+        navigate('/')
+      }
     } catch(error) {
       return 'An error occured'
     }
@@ -54,7 +56,7 @@ const Login = () => {
       <SessionHeader />
       <div className='login-container'>
         <h4 className='font-bold text-xl mb-4'>Sign into your account</h4>
-        {errorMessages && <li className='list-disc pl-2 mb-4 signup-error-message'>{errorMessages}</li>}
+        {error && <li className='list-disc pl-2 mb-4 signup-error-message'>{error}</li>}
         <form className='login-form-container' onSubmit={handleSubmit}>
           <div className=''>
             <label htmlFor='email'></label>

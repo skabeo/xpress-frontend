@@ -24,12 +24,12 @@ export const signupUser = createAsyncThunk('session/signupUser', async (payload)
   }
 })
 
-export const loginUser = createAsyncThunk('session/loginUser', async (payload) => {
+export const loginUser = createAsyncThunk('session/loginUser', async (payload, thunkAPI) => {
   try {
     const response = await axios.post(`${BASE_URL}/login`, payload);
     return response.data;
-  } catch(error) {
-    return error.message;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
 })
 
@@ -75,11 +75,10 @@ export const sessionSlice = createSlice({
         }
         state.error = false;
       })
-      .addCase(loginUser.rejected, (state, action) => {
-        console.log(action)
+      .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;
-        state.error = 'Incorrect email or password'
-      })
+        state.error = 'Incorrect password or email';
+      });
   },
 });
 
