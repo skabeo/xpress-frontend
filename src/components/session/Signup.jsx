@@ -75,8 +75,12 @@ const Signup = () => {
 
     if (errors.length === 0) {
       try {
-        await dispatch(signupUser(payload));
-        navigate('/');
+        const response = await dispatch(signupUser(payload));
+        if (response.error) {
+          return
+        } else {
+          navigate('/');
+        }
       } catch(error) {
         return 'Error occurred'
       }
