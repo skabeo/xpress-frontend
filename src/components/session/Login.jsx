@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
 import SessionHeader from './SessionHeader'
 import './styles/login.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash} from 'react-icons/fa'
-
-// show 'incorect email or password when sign in button is clicked'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../redux/session/sessionSlice'
 
 const Login = () => {
 
   useEffect(() => {
-    document.title = 'Login | Log into your account'
+    document.title = 'Login | Xpress'
   }, [])
 
-  const [errorMessages, setErrorMessages] = useState('')
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading, error } = useSelector((state) => state.session)
+
   const [showPasword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -27,9 +30,25 @@ const Login = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessages('Invalid Email or password')
+    const payload = {
+      user: {
+        email: formData.email,
+        password: formData.password,
+      }
+    }
+
+    try {
+      const response = await dispatch(loginUser(payload));
+      if(response.error) {
+        return
+      } else {
+        navigate('/')
+      }
+    } catch(error) {
+      return 'An error occured'
+    }
   }
 
   return (
@@ -37,7 +56,7 @@ const Login = () => {
       <SessionHeader />
       <div className='login-container'>
         <h4 className='font-bold text-xl mb-4'>Sign into your account</h4>
-        {errorMessages && <li className='list-disc pl-2 mb-4 signup-error-message'>{errorMessages}</li>}
+        {error && <li className='list-disc pl-2 mb-4 signup-error-message'>{error}</li>}
         <form className='login-form-container' onSubmit={handleSubmit}>
           <div className=''>
             <label htmlFor='email'></label>
@@ -72,7 +91,13 @@ const Login = () => {
             </button>
           </div>
 
-          <button type='submit' className='login-button font-bold'>Sign in</button>
+          <button 
+            type='submit' 
+            className='login-button font-bold'
+            disabled={isLoading} 
+            style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
+          >{isLoading ? 'Signing in...' : 'Sign in'}
+          </button>
         </form>
         <div className="horizontal-line-container">
           <hr className="horizontal-line" />

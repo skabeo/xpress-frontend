@@ -24,6 +24,15 @@ export const signupUser = createAsyncThunk('session/signupUser', async (payload)
   }
 })
 
+export const loginUser = createAsyncThunk('session/loginUser', async (payload, thunkAPI) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/login`, payload);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+})
+
 export const sessionSlice = createSlice({
   name: 'sessions',
   initialState,
@@ -50,6 +59,26 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = 'An error occurred during signup'
       })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        const { data } = action.payload;
+        state.isLoading = false;
+        state.currentUser = {
+          id: data.id,
+          firstName: data.first_name,
+          lastName: data.last_name,
+          email: data.email,
+          role: data.role,
+        }
+        state.error = false;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+        state.error = 'Incorrect password or email';
+      });
   },
 });
 
