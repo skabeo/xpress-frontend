@@ -6,7 +6,6 @@ import back from '../../assets/back.png'
 import { useNavigate,Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from '../../redux/session/sessionSlice';
-import { unwrapResult } from '@reduxjs/toolkit';
 
 const Signup = () => {
   const dispatch = useDispatch()
@@ -76,11 +75,10 @@ const Signup = () => {
 
     if (errors.length === 0) {
       try {
-        const resultAction = await dispatch(signupUser(payload));
-        const result = unwrapResult(resultAction);
+        await dispatch(signupUser(payload));
         navigate('/');
       } catch(error) {
-        throw error;
+        return 'Error occurred'
       }
     } else {
       setErrorMessage(errors)

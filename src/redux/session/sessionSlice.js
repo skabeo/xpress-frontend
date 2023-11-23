@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createUser } from "../../api/sessionAPI";
 import axios from "axios";
 
 const BASE_URL = 'http://127.0.0.1:3000/api/v1/auth'
@@ -21,7 +20,7 @@ export const signupUser = createAsyncThunk('session/signupUser', async (payload)
     const response = await axios.post(`${BASE_URL}/signup`, payload);
     return response.data
   } catch(error) {
-    throw error;
+    return 'Error occurred'
   }
 })
 
