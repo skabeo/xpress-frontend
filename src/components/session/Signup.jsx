@@ -3,17 +3,23 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './styles/signup.css'
 import SessionHeader from './SessionHeader';
 import back from '../../assets/back.png'
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signupUser } from '../../redux/session/sessionSlice';
 
 const Signup = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Signup | Register'
   }, [])
 
+  const { isLoading, error } = useSelector((state) => state.session);
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -53,10 +59,30 @@ const Signup = () => {
     return errors;
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const errors = errorMessages()
-    setErrorMessage(errors)
+  const handleSubmit = async (e) => { 
+    e.preventDefault();
+    const errors = errorMessages();
+    setErrorMessage([])
+
+    const payload = {
+      user: {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+      }
+    }
+
+    if (errors.length === 0) {
+      try {
+        await dispatch(signupUser(payload));
+        navigate('/');
+      } catch(error) {
+        return 'Error occurred'
+      }
+    } else {
+      setErrorMessage(errors)
+    }
   }
 
   return (
@@ -73,6 +99,7 @@ const Signup = () => {
           {errorMessage ? errorMessage.map((error, index) => (
             <li key={index} className='signup-error-message'>{error}</li>
           )) : null}
+          {error && <p className='signup-error-message'>{error}</p>}
         </ul>
         <form onSubmit={handleSubmit} className='signup-form'>
           <div className='signup-firstname-container mt-3'>
@@ -161,7 +188,14 @@ const Signup = () => {
             </ul>
           </div>
 
-          <button className='signup-submit-button' type='submit'>Sign Up</button>
+          <button
+            className='signup-submit-button' 
+            type='submit'
+            disabled={isLoading} 
+            style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
+          >
+            {isLoading ? 'Signing Up...' : 'Sign Up'}
+          </button>
         </form>
       </div>
     </section>
