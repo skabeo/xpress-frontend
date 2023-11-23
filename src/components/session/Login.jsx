@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
 import SessionHeader from './SessionHeader'
 import './styles/login.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash} from 'react-icons/fa'
-
-// show 'incorect email or password when sign in button is clicked'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../redux/session/sessionSlice'
 
 const Login = () => {
 
   useEffect(() => {
-    document.title = 'Login | Log into your account'
+    document.title = 'Login | Xpress'
   }, [])
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.session)
 
   const [errorMessages, setErrorMessages] = useState('')
   const [showPasword, setShowPassword] = useState(false)
@@ -27,9 +31,22 @@ const Login = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessages('Invalid Email or password')
+    // setErrorMessages('Invalid Email or password')
+    const payload = {
+      user: {
+        email: formData.email,
+        password: formData.password,
+      }
+    }
+
+    try {
+      await dispatch(loginUser(payload));
+      navigate('/')
+    } catch(error) {
+      return 'An error occured'
+    }
   }
 
   return (
@@ -72,7 +89,13 @@ const Login = () => {
             </button>
           </div>
 
-          <button type='submit' className='login-button font-bold'>Sign in</button>
+          <button 
+            type='submit' 
+            className='login-button font-bold'
+            disabled={isLoading} 
+            style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
+          >{isLoading ? 'Signing in...' : 'Sign in'}
+          </button>
         </form>
         <div className="horizontal-line-container">
           <hr className="horizontal-line" />
