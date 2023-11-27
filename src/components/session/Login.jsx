@@ -41,6 +41,7 @@ const Login = () => {
 
     try {
       const response = await dispatch(loginUser(payload));
+      
       if(response.error) {
         return
       } else {

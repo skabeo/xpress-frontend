@@ -27,6 +27,10 @@ export const signupUser = createAsyncThunk('session/signupUser', async (payload)
 export const loginUser = createAsyncThunk('session/loginUser', async (payload, thunkAPI) => {
   try {
     const response = await axios.post(`${BASE_URL}/login`, payload);
+    const authorizationHeader = response.headers['authorization'];
+    const token = authorizationHeader.split(' ')[1];
+    console.log('Token:', token);
+
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
