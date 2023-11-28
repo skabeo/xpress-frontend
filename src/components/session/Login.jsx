@@ -41,6 +41,7 @@ const Login = () => {
 
     try {
       const response = await dispatch(loginUser(payload));
+      
       if(response.error) {
         return
       } else {
@@ -95,7 +96,10 @@ const Login = () => {
             type='submit' 
             className='login-button font-bold'
             disabled={isLoading} 
-            style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
+            style={{
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              opacity: isLoading ? 0.7 : 1,
+            }}
           >{isLoading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>

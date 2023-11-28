@@ -5,7 +5,7 @@ const SessionHeader = () => {
     <div>
       <h1 className='session-header-container'>
         <span className='x-color'>X</span>
-        <span className='font-bold'>PRESS</span>
+        <span className='font-bold'>PREZ</span>
       </h1>
       <hr className='' />
     </div>
