@@ -1,7 +1,6 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router';
-
+import PropTypes from 'prop-types'
 
 const PrivateRoute = ({ children }) => {
   const { isLoading } = useSelector(state => state.session);
@@ -21,5 +20,9 @@ const PrivateRoute = ({ children }) => {
     <p>Something went wrong</p>
   )
 }
+
+PrivateRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default PrivateRoute

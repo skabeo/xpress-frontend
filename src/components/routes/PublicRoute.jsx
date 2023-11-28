@@ -1,6 +1,6 @@
-import React from 'react'
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router';
+import PropTypes from 'prop-types'
 
 const PublicRoute = ({ children }) => {
   const { isLoading } = useSelector(state => state.session);
@@ -21,5 +21,9 @@ const PublicRoute = ({ children }) => {
     <p>Something went wrong</p>
   )
 }
+
+PublicRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default PublicRoute
