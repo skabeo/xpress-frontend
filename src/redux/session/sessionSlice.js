@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = 'http://127.0.0.1:3000/api/v1/auth'
+const BASE_URL = 'http://127.0.0.1:3000/api/v1/auth';
+
+const getToken = () => {
+  return localStorage.getItem('TOKEN');
+}
 
 const initialState = {
   currentUser: {
@@ -12,7 +16,8 @@ const initialState = {
     role: '',
   },
   isLoading: false,
-  error: null
+  error: null,
+  accessToken: ''
 }
 
 export const signupUser = createAsyncThunk('session/signupUser', async (payload) => {
@@ -29,13 +34,17 @@ export const loginUser = createAsyncThunk('session/loginUser', async (payload, t
     const response = await axios.post(`${BASE_URL}/login`, payload);
     const authorizationHeader = response.headers['authorization'];
     const token = authorizationHeader.split(' ')[1];
-    console.log('Token:', token);
+    saveToken(token)
 
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 })
+
+const saveToken = (token) => {
+  localStorage.setItem('TOKEN', token)
+}
 
 export const sessionSlice = createSlice({
   name: 'sessions',
@@ -78,6 +87,7 @@ export const sessionSlice = createSlice({
           role: data.role,
         }
         state.error = false;
+        state.accessToken = getToken()
       })
       .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;
