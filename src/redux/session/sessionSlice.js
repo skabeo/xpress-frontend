@@ -23,6 +23,10 @@ const initialState = {
 export const signupUser = createAsyncThunk('session/signupUser', async (payload) => {
   try {
     const response = await axios.post(`${BASE_URL}/signup`, payload);
+    const authorizationHeader = response.headers['authorization'];
+    const token = authorizationHeader.split(' ')[1];
+    saveToken(token)
+    
     return response.data
   } catch(error) {
     return 'Error occurred'
