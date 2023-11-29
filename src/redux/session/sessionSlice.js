@@ -42,8 +42,28 @@ export const loginUser = createAsyncThunk('session/loginUser', async (payload, t
   }
 })
 
+export const logoutUser = createAsyncThunk('session/logout', 
+async (accessToken) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  try {
+    const response = axios.delete(`${BASE_URL}/logout`, config)
+    return response.data
+  } catch (error) {
+    return error.response.data;
+  }
+})
+
 const saveToken = (token) => {
   localStorage.setItem('TOKEN', token)
+}
+
+const removeToken = () => {
+  localStorage.removeItem('TOKEN')
 }
 
 export const sessionSlice = createSlice({
@@ -92,7 +112,23 @@ export const sessionSlice = createSlice({
       .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;
         state.error = 'Incorrect password or email';
-      });
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = false;
+        state.currentUser = {
+          id: undefined,
+          firstName: undefined,
+          lastName: undefined,
+          email: undefined,
+          role: undefined
+        }
+        removeToken();
+      })
   },
 });
 
