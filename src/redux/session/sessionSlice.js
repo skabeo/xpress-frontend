@@ -66,8 +66,14 @@ const saveToken = (token) => {
   localStorage.setItem('TOKEN', token)
 }
 
-const removeToken = () => {
+const saveUserInfo = (info) => {
+  const userInfoString = JSON.stringify(info);
+  localStorage.setItem('USER_INFO', userInfoString);
+}
+
+const removeLocalData = () => {
   localStorage.removeItem('TOKEN')
+  localStorage.removeItem('USER_INFO')
 }
 
 export const sessionSlice = createSlice({
@@ -110,6 +116,7 @@ export const sessionSlice = createSlice({
           email: data.email,
           role: data.role,
         }
+        saveUserInfo(data);
         state.error = false;
         state.accessToken = getToken()
       })
@@ -131,7 +138,7 @@ export const sessionSlice = createSlice({
           email: undefined,
           role: undefined
         }
-        removeToken();
+        removeLocalData();
       })
   },
 });
