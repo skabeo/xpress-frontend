@@ -22,19 +22,15 @@ function App() {
         />
         <Route 
           path='/signup' 
-          element={(
-            <PublicRoute>
+          element={
               <Signup />
-            </PublicRoute>
-          )} 
+          } 
         />
         <Route 
           path='/login' 
-          element={(
-            <PublicRoute>
+          element={
               <Login />
-            </PublicRoute>
-          )} 
+          } 
         />
         <Route 
           path='/logout'
