@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 
 const PublicRoute = ({ children }) => {
   const { isLoading } = useSelector(state => state.session);
-  const accessToken = localStorage.getItem('TOKEN')
+  const accessToken = localStorage.getItem('TOKEN');
   const location = useLocation();
   const fromLocation = (location.state)?.from;
   const prevLocation = fromLocation || { pathname: '/' }
 
   if (!accessToken && !isLoading) {
-    return children
+    return children;
   } else if (isLoading) {
     return <p>Loading...</p>
   } else if (accessToken && !isLoading) {
@@ -26,4 +26,4 @@ PublicRoute.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default PublicRoute
+export default PublicRoute;

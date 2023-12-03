@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Signup from './components/session/Signup'
 import Login from './components/session/Login'
 import PrivateRoute from './components/routes/PrivateRoute'
-import PublicRoute from './components/routes/PublicRoute'
+import Logout from './components/session/Logout'
 
 function App() {
 
@@ -21,19 +21,23 @@ function App() {
         />
         <Route 
           path='/signup' 
-          element={(
-            <PublicRoute>
+          element={
               <Signup />
-            </PublicRoute>
-          )} 
+          } 
         />
         <Route 
           path='/login' 
-          element={(
-            <PublicRoute>
+          element={
               <Login />
-            </PublicRoute>
-          )} 
+          } 
+        />
+        <Route 
+          path='/logout'
+          element={(
+            <PrivateRoute>
+              <Logout />
+            </PrivateRoute>
+          )}
         />
       </Routes>
     </>
