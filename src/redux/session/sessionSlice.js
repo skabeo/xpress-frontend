@@ -140,6 +140,10 @@ export const sessionSlice = createSlice({
         }
         removeLocalData();
       })
+      .addCase(logoutUser.rejected, (state) => {
+        state.isLoading = false;
+        state.error = 'Something went wrong'
+      })
   },
 });
 
