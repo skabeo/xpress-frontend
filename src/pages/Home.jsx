@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Sidebar from "../components/sidebar/Sidebar";
 
 const Home = () => {
   useEffect(() => {
@@ -7,13 +8,12 @@ const Home = () => {
   }, []);
   
   return (
-    <div className="bg-blue-500 text-white p-4 d-flex">
-      <p>Hello</p>
-      <p>Hey</p>
+    <div>
+      <Sidebar />
 
-      <Link to='/logout'>
-        <button className="text-white bg-black">Logout</button>
-      </Link>
+      {/* <Link to='/logout'>
+        <button>Logout</button>
+      </Link> */}
     </div>  
   )
 }
