@@ -10,7 +10,7 @@ const Logout = () => {
     if (token) {
       dispatch(logoutUser(token));
     }
-  }, [dispatch, token])
+  }, [])
 
   return (
     <div>Logout</div>

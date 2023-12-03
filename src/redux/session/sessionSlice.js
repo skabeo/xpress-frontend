@@ -55,7 +55,7 @@ async (accessToken) => {
   };
 
   try {
-    const response = axios.delete(`${BASE_URL}/logout`, config)
+    const response = await axios.delete(`${BASE_URL}/logout`, config)
     return response.data
   } catch (error) {
     return error.response.data;
