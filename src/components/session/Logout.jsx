@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/session/sessionSlice';
@@ -11,7 +10,7 @@ const Logout = () => {
     if (token) {
       dispatch(logoutUser(token));
     }
-  }, [])
+  }, [dispatch, token])
 
   return (
     <div>Logout</div>

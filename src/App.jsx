@@ -4,7 +4,6 @@ import Home from './pages/Home'
 import Signup from './components/session/Signup'
 import Login from './components/session/Login'
 import PrivateRoute from './components/routes/PrivateRoute'
-import PublicRoute from './components/routes/PublicRoute'
 import Logout from './components/session/Logout'
 
 function App() {
