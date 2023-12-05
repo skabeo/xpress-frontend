@@ -14,16 +14,22 @@ const Sidebar = () => {
       
       */}
       {/* design side bar */}
-      <div className='sidebar-user-name'>
-        <p>Spencer</p>
-        <span onClick={() => setAngleIcon(!angleIcon)}>
-          <FontAwesomeIcon icon={ angleIcon ? faAngleUp : faAngleDown} />
-        </span>
+      <div className='main-sidebar-user-name'>
+        <div className='sidebar-user-name'>
+          <p>Spencer</p>
+          <span onClick={() => setAngleIcon(!angleIcon)}>
+            <FontAwesomeIcon icon={ angleIcon ? faAngleUp : faAngleDown} />
+          </span>
+        </div>
+        { !angleIcon && 
+        <div className='name-drop-down-options'>
+          <p>Recommend Xpres</p>
+          <Link to='/logout'>
+            <button>Log Out</button>
+          </Link>
+        </div> }
       </div>
 
-      <Link to='/logout'>
-        <button>Logout</button>
-      </Link>
     </div>
   )
 }
