@@ -33,4 +33,20 @@
   box-shadow: 0 5px 4px rgba(0, 161, 126, 0.5);
   padding: 10px 10px 10px 15px;
   z-index: 99;
+  color: #dde8e5;
+}
+
+.name-drop-down-options p {
+  cursor: pointer;
+}
+
+
+.name-drop-down-options hr {
+  color: #dde8e5;
+  margin: 3px 0;
+}
+
+.name-drop-down-options p:hover,
+.name-drop-down-options a:hover {
+  color: white;
 }

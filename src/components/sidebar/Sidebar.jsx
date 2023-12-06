@@ -16,18 +16,33 @@ const Sidebar = () => {
       {/* design side bar */}
       <div className='main-sidebar-user-name'>
         <div className='sidebar-user-name'>
-          <p>Spencer</p>
+          <p className='font-bold'>Spencer</p>
           <span onClick={() => setAngleIcon(!angleIcon)}>
             <FontAwesomeIcon icon={ angleIcon ? faAngleUp : faAngleDown} />
           </span>
         </div>
         { angleIcon && 
         <div className='name-drop-down-options'>
-          <p>Recommend Xpres</p>
-          <Link to='/logout'>
+          <p className='text-sm'>Recommend Xpres</p>
+          <hr />
+          <Link to='/logout' className='text-sm'>
             <button>Log Out</button>
           </Link>
         </div> }
+      </div>
+
+      <div>
+        <ul>
+          <li>Home</li>
+          <li>My orders</li>
+          <li>My orders</li>
+          <li>Home</li>
+          <li>My orders</li>
+          <li>My orders</li>
+          <li>Home</li>
+          <li>My orders</li>
+          <li>My orders</li>
+        </ul>
       </div>
 
     </div>
