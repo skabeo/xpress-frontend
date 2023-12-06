@@ -21,7 +21,7 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={ angleIcon ? faAngleUp : faAngleDown} />
           </span>
         </div>
-        { !angleIcon && 
+        { angleIcon && 
         <div className='name-drop-down-options'>
           <p>Recommend Xpres</p>
           <Link to='/logout'>
