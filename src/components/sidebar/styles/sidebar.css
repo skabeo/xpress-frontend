@@ -50,3 +50,27 @@
 .name-drop-down-options a:hover {
   color: white;
 }
+
+.sidebar-links {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.sidebar-links li {
+  padding: 5px 0;
+  font-size: 15px
+}
+
+.first-side-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* .icon {
+  border: 1px solid;
+} */
+
+.sidebar-home {
+  padding-top: 2px;
+}

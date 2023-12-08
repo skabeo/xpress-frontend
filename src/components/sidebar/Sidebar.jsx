@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import './styles/sidebar.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faAngleDown, 
+  faAngleUp,
+  faHome 
+} from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = () => {
   const [angleIcon, setAngleIcon] = useState(false);
@@ -31,9 +35,12 @@ const Sidebar = () => {
         </div> }
       </div>
 
-      <div>
+      <div className='sidebar-links'>
         <ul>
-          <li>Home</li>
+          <li className='first-side-link'>
+            <FontAwesomeIcon className='icon' icon={faHome} />
+            <span className='icon sidebar-home'>Home</span>
+          </li>
           <li>My orders</li>
           <li>My orders</li>
           <li>Home</li>
