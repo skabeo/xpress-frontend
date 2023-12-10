@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faAngleDown, 
   faAngleUp,
-  faHome,
-  faShoppingCart 
 } from '@fortawesome/free-solid-svg-icons';
 import Admin from './Admin';
 import User from './User';

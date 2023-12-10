@@ -1,10 +1,8 @@
-import React from 'react';
 import './styles/sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHome,
   faShoppingCart,
-  faChartBar,
   faShoppingBag,
   faUsers 
 } from '@fortawesome/free-solid-svg-icons';

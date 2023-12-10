@@ -1,4 +1,3 @@
-import React from 'react'
 import './styles/sidebar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
