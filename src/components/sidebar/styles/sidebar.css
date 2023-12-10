@@ -1,0 +1,78 @@
+.sidebar-main-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 215px;
+  background-color: #35977e;
+  color: white;
+  z-index: 999;
+  padding: 5px 8px;
+  border-radius: 2px;
+}
+
+.sidebar-user-name {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #6cb8a5;
+  padding: 10px 10px 10px 15px;
+  border-radius: 3px;
+  box-shadow: 0 5px 4px rgba(0, 161, 126, 0.5);
+  height: 60px;
+}
+
+.name-drop-down-options {
+  position: absolute;
+  background: #6cb8a5;
+  top: 50px;
+  left: 8px;
+  right: 8px;
+  border-radius: 3px;
+  box-shadow: 0 5px 4px rgba(0, 161, 126, 0.5);
+  padding: 10px 10px 10px 15px;
+  z-index: 99;
+  color: #dde8e5;
+}
+
+.name-drop-down-options p {
+  cursor: pointer;
+}
+
+.name-drop-down-options hr {
+  color: #dde8e5;
+  margin: 3px 0;
+}
+
+.name-drop-down-options p:hover,
+.name-drop-down-options a:hover {
+  color: white;
+}
+
+.sidebar-links {
+  margin-top: 20px;
+}
+
+.sidebar-links li {
+  padding: 5px 0;
+  padding-left: 20px;
+  font-size: 15px;
+}
+
+.first-side-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+
+.first-side-link:hover {
+  background: #14876a;
+}
+
+.sidebar-home {
+  padding-top: 2px;
+}
