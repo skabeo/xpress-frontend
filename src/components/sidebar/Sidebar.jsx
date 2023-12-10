@@ -5,17 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faAngleDown, 
   faAngleUp,
-  faHome,
-  faShoppingCart 
 } from '@fortawesome/free-solid-svg-icons';
+import Admin from './Admin';
+import User from './User';
 
 const Sidebar = () => {
   const [angleIcon, setAngleIcon] = useState(false);
+  const storedUSerInfo = localStorage.getItem("USER_INFO");
+  const parsedData = JSON.parse(storedUSerInfo);
+
   return (
     <div className='sidebar-main-container'>
       <div className='main-sidebar-user-name'>
         <div className='sidebar-user-name'>
-          <p className='font-bold'>Spencer</p>
+          <p className='font-bold'>{parsedData.first_name}</p>
           <span onClick={() => setAngleIcon(!angleIcon)}>
             <FontAwesomeIcon icon={ angleIcon ? faAngleUp : faAngleDown} />
           </span>
@@ -31,16 +34,7 @@ const Sidebar = () => {
       </div>
 
       <div className='sidebar-links'>
-        <ul>
-          <li className='first-side-link'>
-            <FontAwesomeIcon icon={faHome} />
-            <span className='sidebar-home'>Home</span>
-          </li>
-          <li className='first-side-link'>
-            <FontAwesomeIcon className='side-order-icon' icon={faShoppingCart} />
-            <span className='side-orders'>My orders</span>
-          </li>
-        </ul>
+        {parsedData.role === 'admin' ? <Admin /> : <User />}
       </div>
     </div>
   )
