@@ -8,6 +8,8 @@ import {
   faHome,
   faShoppingCart 
 } from '@fortawesome/free-solid-svg-icons';
+import Admin from './Admin';
+import User from './User';
 
 const Sidebar = () => {
   const [angleIcon, setAngleIcon] = useState(false);
@@ -34,16 +36,7 @@ const Sidebar = () => {
       </div>
 
       <div className='sidebar-links'>
-        <ul>
-          <li className='first-side-link'>
-            <FontAwesomeIcon icon={faHome} />
-            <span className='sidebar-home'>Home</span>
-          </li>
-          <li className='first-side-link'>
-            <FontAwesomeIcon className='side-order-icon' icon={faShoppingCart} />
-            <span className='side-orders'>My orders</span>
-          </li>
-        </ul>
+        {parsedData.role === 'admin' ? <Admin /> : <User />}
       </div>
     </div>
   )
