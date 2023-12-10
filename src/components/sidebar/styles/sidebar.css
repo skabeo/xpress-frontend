@@ -40,7 +40,6 @@
   cursor: pointer;
 }
 
-
 .name-drop-down-options hr {
   color: #dde8e5;
   margin: 3px 0;
@@ -58,7 +57,7 @@
 .sidebar-links li {
   padding: 5px 0;
   padding-left: 20px;
-  font-size: 15px
+  font-size: 15px;
 }
 
 .first-side-link {
@@ -71,7 +70,7 @@
 }
 
 .first-side-link:hover {
-  background: #14876a
+  background: #14876a;
 }
 
 .sidebar-home {
