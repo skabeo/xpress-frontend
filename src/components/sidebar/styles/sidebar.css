@@ -53,11 +53,11 @@
 
 .sidebar-links {
   margin-top: 20px;
-  padding-left: 20px;
 }
 
 .sidebar-links li {
   padding: 5px 0;
+  padding-left: 20px;
   font-size: 15px
 }
 
@@ -65,11 +65,14 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
 }
 
-/* .icon {
-  border: 1px solid;
-} */
+.first-side-link:hover {
+  background: #14876a
+}
 
 .sidebar-home {
   padding-top: 2px;
