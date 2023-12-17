@@ -66,7 +66,7 @@
   gap: 5px;
   cursor: pointer;
   transition: all 0.2s;
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 .first-side-link:hover {
@@ -75,4 +75,9 @@
 
 .sidebar-home {
   padding-top: 2px;
+}
+
+/* Make active link dynamic */
+.first-fr {
+  background: #14876a;
 }
