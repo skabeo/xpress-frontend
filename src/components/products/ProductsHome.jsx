@@ -1,19 +1,20 @@
 import React from 'react';
 import Products from './Products';
 import { useSelector } from 'react-redux';
+import './styles/product.css'
 
 const ProductsHome = () => {
   const actualProducts = useSelector((state) => state.product.products);
-  // console.log(actualProducts)
+
   return (
-    <>
-      <h1>Products</h1>
-      <div>
-        {Array.from({ length: actualProducts.length }).map((_, index) => (
-          <Products key={index} />
+    <div className='products-home-container'>
+      <h1 className='products-title'>Products</h1>
+      <div className='products-cards'>
+        {actualProducts.length > 0 && actualProducts.map((product, index) => (
+          <Products key={index} product={product} />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

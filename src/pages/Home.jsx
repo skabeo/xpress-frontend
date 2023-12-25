@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import './styles/home.css'
 import Sidebar from "../components/sidebar/Sidebar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/products/productSlice";
 import ProductsHome from "../components/products/ProductsHome";
 import Products from "../components/products/Products";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.product)
+  console.log(isLoading)
 
   useEffect(() => {
     document.title = 'Home | Xpress';
@@ -21,7 +23,7 @@ const Home = () => {
     <div>
       <Sidebar />
       <div className="products-grid">
-        <ProductsHome />
+        {isLoading ? <div>Loading...</div> : <ProductsHome />}
       </div>
     </div>  
   )
