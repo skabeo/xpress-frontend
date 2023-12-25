@@ -15,7 +15,6 @@ const ProductDetails = () => {
   }, [dispatch]);
 
   const specificProduct = Array.isArray(products) ? products.find(product => product.id === parseInt(id)) : null;
-  console.log(specificProduct)
 
   return (
     <div className='product-details-container'>
