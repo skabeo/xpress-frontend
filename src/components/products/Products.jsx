@@ -1,8 +1,6 @@
-import React from 'react';
 import './styles/product.css'
-import house from '../../assets/house.jpg'
-import slips from '../../assets/slips.jpg'
-import spoon from '../../assets/spoons.jpg'
+import PropTypes from 'prop-types';
+import spoon from '../../assets/spoons.jpg';
 
 const Products = ({ product }) => {
   return (
@@ -26,5 +24,13 @@ const Products = ({ product }) => {
     </div>
   )
 }
+
+Products.propTypes = {
+  product: PropTypes.shape({
+    price: PropTypes.number.isRequired,
+    weight_kg: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Products
