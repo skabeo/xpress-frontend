@@ -9,7 +9,7 @@ const User = () => {
   return (
     <div className='sidebar-links'>
       <ul>
-        <li className='first-side-link'>
+        <li className='first-side-link first-fr'>
           <FontAwesomeIcon icon={faHome} />
           <span className='sidebar-home'>Home</span>
         </li>
