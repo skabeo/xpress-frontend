@@ -2,10 +2,19 @@
   border: 1px solid rgb(211, 211, 211);
   width: 272px;
   border-radius: 10px;
-  transition: all 0.15;
+  transition: all 0.15s;
 }
 
-.products-home-grid:hover .products-view-deal{
+.products-view-deal {
+  outline: 1px solid #35977e;
+  padding: 5px 8px;
+  border-radius: 4px;
+  color: #35977e;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.products-home-grid:hover .products-view-deal {
   background: linear-gradient(135deg, #53edc6, #1b725c 100%, #63c0a8) !important;
   color: white;
   outline: none;
@@ -38,22 +47,12 @@
   gap: 30px;
 }
 
-.products-view-deal {
-  outline: 1px solid #35977e;
-  padding: 5px 8px;
-  border-radius: 4px;
-  color: #35977e;
-  font-size: 13px;
-  font-weight: bold;
-}
-
 .products-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 10px;
   column-gap: 10px;
-  max-width: fit-content;
-  margin-left: 0 auto;
+  width: fit-content;
 }
 
 .products-title {
