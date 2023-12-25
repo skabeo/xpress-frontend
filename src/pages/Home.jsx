@@ -8,7 +8,6 @@ import ProductsHome from "../components/products/ProductsHome";
 const Home = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.product)
-  console.log(isLoading)
 
   useEffect(() => {
     document.title = 'Home | Xpress';
@@ -22,7 +21,10 @@ const Home = () => {
     <div>
       <Sidebar />
       <div className="products-grid">
-        {isLoading ? <div>Loading...</div> : <ProductsHome />}
+        {isLoading ? 
+          <div className="custom-loader-container">
+            <div className="custom-loader"></div> 
+          </div> : <ProductsHome />}
       </div>
     </div>  
   )
