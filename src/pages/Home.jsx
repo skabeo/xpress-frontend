@@ -3,6 +3,7 @@ import './styles/home.css'
 import Sidebar from "../components/sidebar/Sidebar";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../redux/products/productSlice";
+import ProductsHome from "../components/products/ProductsHome";
 import Products from "../components/products/Products";
 
 const Home = () => {
@@ -20,7 +21,7 @@ const Home = () => {
     <div>
       <Sidebar />
       <div className="products-grid">
-        <Products />
+        <ProductsHome />
       </div>
     </div>  
   )
