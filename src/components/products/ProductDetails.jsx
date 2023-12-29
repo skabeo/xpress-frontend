@@ -28,7 +28,7 @@ const ProductDetails = () => {
             <p className='details-home-link'>Home</p>
           </Link>
           <FontAwesomeIcon className='angle-right' icon={faAngleRight} />
-          {specificProduct && <p>{specificProduct.name}</p>}
+          {specificProduct && <p>{specificProduct.id}</p>}
         </div>
         <hr />
         <div className='pro-details-section-containers'>

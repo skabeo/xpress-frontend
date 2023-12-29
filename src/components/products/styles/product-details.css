@@ -57,6 +57,10 @@
   gap: 24px;
 }
 
+.desc-first-right-side {
+  max-width: 720px;
+}
+
 .main-home-ref {
   font-size: 13px;
   background-color: rgb(239, 239, 239);
@@ -95,4 +99,9 @@
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+}
+
+.desc-overview div {
+  display: flex;
+  gap: 50px;
 }
