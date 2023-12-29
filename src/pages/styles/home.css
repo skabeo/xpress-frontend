@@ -10,6 +10,7 @@
 }
 
 .custom-loader {
+<<<<<<< HEAD
   width:50px;
   height:50px;
   border-radius:50%;
@@ -18,3 +19,14 @@
   animation:s3 1s infinite linear;
 }
 @keyframes s3 {to{transform: rotate(1turn)}}
+=======
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, #35977e);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: s3 1s infinite linear;
+}
+
+@keyframes s3 { to { transform: rotate(1turn); } }
+>>>>>>> a7878828eea1a6fd962341f0fb098a95c08ac1b8
