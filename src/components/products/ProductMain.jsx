@@ -1,7 +1,6 @@
-import React from 'react';
 import slips from '../../assets/slips.jpg';
+import PropTypes from 'prop-types';
 import './styles/product-details.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import heart from '../../assets/heart-regular.svg'
 
 const ProductMain = ({ specificProduct }) => {
@@ -69,5 +68,23 @@ const ProductMain = ({ specificProduct }) => {
     </div>
   )
 }
+
+ProductMain.propTypes = {
+  specificProduct: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    brand: PropTypes.string.isRequired,
+    weight_kg: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    batch: PropTypes.shape({
+      batch_number: PropTypes.number.isRequired,
+    }).isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default ProductMain

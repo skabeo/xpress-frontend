@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Sidebar from '../sidebar/Sidebar';
 import './styles/product-details.css'
 import { Link, useParams } from 'react-router-dom';
