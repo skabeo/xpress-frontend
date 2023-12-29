@@ -5,6 +5,7 @@ import Signup from './components/session/Signup'
 import Login from './components/session/Login'
 import PrivateRoute from './components/routes/PrivateRoute'
 import Logout from './components/session/Logout'
+import ProductDetails from './components/products/ProductDetails'
 
 function App() {
 
@@ -18,6 +19,14 @@ function App() {
               <Home />
             </PrivateRoute>
           )} 
+        />
+        <Route 
+          path='/products/:id'
+          element={(
+            <PrivateRoute>
+              <ProductDetails />
+            </PrivateRoute>
+          )}
         />
         <Route 
           path='/signup' 
