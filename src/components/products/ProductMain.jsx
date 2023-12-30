@@ -47,21 +47,26 @@ const ProductMain = ({ specificProduct }) => {
             <hr />
           </div>
         </div>
-        <div className='second-main-section'>
-          <p className='main-home-ref'>Home REF: {specificProduct.id}</p>
-          <div className='second-inner-section'>
-            <span className='save-box'>
-              <img src={heart} />
-              <p>Save</p>
-            </span>
-            <span className='price-box'>
-              <p className='font-bold text-sm'>Price</p>
-              <p>at <span className='font-bold text-xl'>GH₵{specificProduct.price}</span></p>
-            </span>
-            <span className='date-box'>
-              <p>Added on</p>
-              <p>{formattedDate}</p>
-            </span>
+        <div >
+          <div className='second-main-section'>
+            <p className='main-home-ref'>Home REF: {specificProduct.id}</p>
+            <div className='second-inner-section'>
+              <span className='save-box'>
+                <img src={heart} />
+                <p>Save</p>
+              </span>
+              <span className='price-box'>
+                <p className='font-bold text-sm'>Price</p>
+                <p>at <span className='font-bold text-xl'>GH₵{specificProduct.price}</span></p>
+              </span>
+              <span className='date-box'>
+                <p>Added on</p>
+                <p>{formattedDate}</p>
+              </span>
+            </div>
+          </div>
+          <div className='mt-3'>
+            <button className='details-order'>Order Now</button>
           </div>
         </div>
       </div>
