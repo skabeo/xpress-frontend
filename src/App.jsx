@@ -6,6 +6,7 @@ import Login from './components/session/Login'
 import PrivateRoute from './components/routes/PrivateRoute'
 import Logout from './components/session/Logout'
 import ProductDetails from './components/products/ProductDetails'
+import OrderPage from './components/orders/OrderPage'
 
 function App() {
 
@@ -25,6 +26,14 @@ function App() {
           element={(
             <PrivateRoute>
               <ProductDetails />
+            </PrivateRoute>
+          )}
+        />
+        <Route 
+          path='/products/:id/order'
+          element={(
+            <PrivateRoute>
+              <OrderPage />
             </PrivateRoute>
           )}
         />

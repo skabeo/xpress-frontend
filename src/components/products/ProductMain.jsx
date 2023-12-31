@@ -2,6 +2,7 @@ import slips from '../../assets/slips.jpg';
 import PropTypes from 'prop-types';
 import './styles/product-details.css'
 import heart from '../../assets/heart-regular.svg'
+import { Link } from 'react-router-dom';
 
 const ProductMain = ({ specificProduct }) => {
 
@@ -66,7 +67,9 @@ const ProductMain = ({ specificProduct }) => {
             </div>
           </div>
           <div className='mt-3'>
-            <button className='details-order'>Order Now</button>
+            <Link to={`/products/${specificProduct.id}/order`}>
+              <button className='details-order'>Order Now</button>
+            </Link>
           </div>
         </div>
       </div>
