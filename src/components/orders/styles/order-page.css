@@ -1,0 +1,16 @@
+.order-page-container {
+  margin-left: 215px;
+}
+
+.order-page-heading {
+  margin: 20px 0;
+  padding: 0 20px;
+  color: #57584e;
+  font-weight: bold;
+}
+
+.order-page-section {
+  border: 1px solid red;
+  display: flex;
+  
+}
