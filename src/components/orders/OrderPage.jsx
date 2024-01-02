@@ -11,7 +11,7 @@ const OrderPage = () => {
         </div>
         <hr />
         <div className="order-page-section">
-          <div>Hey</div>
+          <div className="order-first-section">Hey</div>
           <div>Hello</div>
         </div>
       </div>

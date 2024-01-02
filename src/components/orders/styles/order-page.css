@@ -12,4 +12,9 @@
 .order-page-section {
   border: 1px solid red;
   display: flex;
+  gap: 24px;
+}
+
+.order-first-section {
+  min-width: 720px;
 }
