@@ -9,7 +9,7 @@ const OrderPage = () => {
       <Sidebar />
       <div>
         <div className="order-page-heading">
-          <p>Checkout (1 item)</p>
+          <p>Checkout ( 1 item )</p>
         </div>
         <hr />
         <div className="order-page-section">
@@ -17,7 +17,7 @@ const OrderPage = () => {
             <div>
               <p>Shipping address</p>
               <div className="inner-order-list">
-                <p className="font-bold text-sm">Your address</p>
+                <p className="font-bold text-sm mb-1">Your address</p>
                 <hr />
                 <div className="radio-address">
                   <input 
@@ -27,13 +27,12 @@ const OrderPage = () => {
                   />
                   <span className="text-xs">Spencer Okyere B1023/24 Obonu St, Accra, Ghana.<span>Edit address</span></span>
                 </div>
-                <div>
-                  <span></span>
-
-                  <FontAwesomeIcon icon={faPlus} style={{ color: 'gray' }}/>
-                  <span>Add Address</span>
+                <div className="mt-2 px-2 text-sm">
+                  <FontAwesomeIcon icon={faPlus} className="plus-icon" />
+                  <span className="pl-1">Add Address</span>
                 </div>
               </div>
+              <p>What</p>
             </div>
             <div>
               <p>Items and shipping</p>
