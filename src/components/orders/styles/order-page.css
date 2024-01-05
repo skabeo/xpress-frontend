@@ -27,7 +27,7 @@
 }
 
 .inner-order-list {
-  outline: 1px #D5D9D9 solid;
+  outline: 1px #d5d9d9 solid;
   padding: 14px 18px;
   border-radius: 5px;
 }
@@ -67,7 +67,7 @@
 .items-inner-container {
   display: flex;
   gap: 10px;
-  outline: 1px #D5D9D9 solid;
+  outline: 1px #d5d9d9 solid;
   padding: 14px 18px;
   border-radius: 5px;
 }
@@ -86,7 +86,7 @@
 }
 
 .quantity-dropdown {
-  border: 1px solid #D5D9D9;
+  border: 1px solid #d5d9d9;
   border-radius: 5px;
   padding: 2px;
   background-color: #dcdcdc;
