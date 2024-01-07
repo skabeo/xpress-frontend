@@ -36,7 +36,7 @@ const OrderPage = () => {
               </div>
             </div>
             <div className="mt-5">
-              <p className="ship-title font-bold mb-4">Items and shipping</p>
+              <p className="ship-title font-bold mb-4">Quantity</p>
               <div className="items-inner-container">
                 <div className="items-img-container">
                   <img src={slips} alt="image" className="items-img" />
@@ -54,12 +54,26 @@ const OrderPage = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-5 font-bold">
-              <p className="ship-title">Payment method</p>
-              
-            </div>
           </div>
-          <div className="order-sec-section">Hello</div>
+          <div className="order-sec-section p-4">
+            <h2 className="font-bold mb-5">Order Summary</h2>
+            <div>
+              <span className="text-xs flex justify-between mb-1">
+                <p>Items:</p>
+                <p>GHc 35.00</p>
+              </span>
+              <span className="text-xs flex justify-between">
+                <p>Estimated Shipping:</p>
+                <p>GHc 35.00</p>
+              </span>
+              <hr className="mt-1 hori-line" />
+              <span className="flex justify-between font-bold mt-5">
+                <p className="order-total">Order Total:</p>
+                <p>GHc 35.00</p>
+              </span>
+            </div>
+            <button className="place-order mt-7 text-sm">Place order</button>
+          </div>
         </div>
       </div>
     </div>

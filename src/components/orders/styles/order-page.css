@@ -22,8 +22,10 @@
 }
 
 .order-sec-section {
-  border: 1px solid red;
+  outline: 1px #d5d9d9 solid;
   width: 335px;
+  border-radius: 5px;
+  height: fit-content;
 }
 
 .inner-order-list {
@@ -95,4 +97,27 @@
 
 .quantity-dropdown:focus {
   outline: none;
+}
+
+.order-total {
+  color: #da910b;
+}
+
+.hori-line {
+  border: 1px rgb(195, 195, 195) solid;
+}
+
+.place-order {
+  padding: 4px 7px;
+  border-radius: 3px;
+  background-color: #f5e74d;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.place-order:hover {
+  outline: 1px #f5e74d solid;
+  background-color: inherit;
 }
