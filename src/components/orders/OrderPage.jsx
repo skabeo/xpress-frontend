@@ -1,10 +1,32 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Sidebar from "../sidebar/Sidebar"
-import './styles/order-page.css'
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import slips from '../../assets/slips.jpg'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Sidebar from "../sidebar/Sidebar";
+import './styles/order-page.css';
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import slips from '../../assets/slips.jpg';
+import { usePaystackPayment } from "react-paystack";
 
 const OrderPage = () => {
+  const config = {
+    reference: (new Date()).getTime().toString(),
+    email: "user@example.com",
+    amount: 35 * 100,
+    currency: 'GHS',
+    publicKey: 'pk_test_d461aaaf7bbb3596e2967d2cd4fb2beeceb44bd5',
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
+  const onSuccess = (reference) => {
+    alert('Payment successful');
+    
+    console.log(reference);
+  };
+
+  const onClose = () => {
+    alert('Payment unsuccessfull')
+    // console.log('closed')
+  }
+
   return (
     <div className="order-page-container">
       <Sidebar />
@@ -72,7 +94,12 @@ const OrderPage = () => {
                 <p>GHc 35.00</p>
               </span>
             </div>
-            <button className="place-order mt-7 text-sm">Place order</button>
+            <button 
+              className="place-order mt-7 text-sm"
+              onClick={() => {
+                initializePayment(onSuccess, onClose)
+              }}
+            >Place order</button>
           </div>
         </div>
       </div>
