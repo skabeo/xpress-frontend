@@ -105,3 +105,16 @@
   display: flex;
   gap: 50px;
 }
+
+.details-order {
+  background: linear-gradient(135deg, #53edc6, #1b725c 100%, #63c0a8) !important;
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 0;
+  transition: all 0.15s;
+}
+
+.details-order:hover {
+  background: linear-gradient(255deg, #53edc6, #1b725c 100%, #63c0a8) !important;
+}

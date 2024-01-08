@@ -2,6 +2,7 @@ import slips from '../../assets/slips.jpg';
 import PropTypes from 'prop-types';
 import './styles/product-details.css'
 import heart from '../../assets/heart-regular.svg'
+import { Link } from 'react-router-dom';
 
 const ProductMain = ({ specificProduct }) => {
 
@@ -47,21 +48,28 @@ const ProductMain = ({ specificProduct }) => {
             <hr />
           </div>
         </div>
-        <div className='second-main-section'>
-          <p className='main-home-ref'>Home REF: {specificProduct.id}</p>
-          <div className='second-inner-section'>
-            <span className='save-box'>
-              <img src={heart} />
-              <p>Save</p>
-            </span>
-            <span className='price-box'>
-              <p className='font-bold text-sm'>Price</p>
-              <p>at <span className='font-bold text-xl'>GH₵{specificProduct.price}</span></p>
-            </span>
-            <span className='date-box'>
-              <p>Added on</p>
-              <p>{formattedDate}</p>
-            </span>
+        <div >
+          <div className='second-main-section'>
+            <p className='main-home-ref'>Home REF: {specificProduct.id}</p>
+            <div className='second-inner-section'>
+              <span className='save-box'>
+                <img src={heart} />
+                <p>Save</p>
+              </span>
+              <span className='price-box'>
+                <p className='font-bold text-sm'>Price</p>
+                <p>at <span className='font-bold text-xl'>GH₵{specificProduct.price}</span></p>
+              </span>
+              <span className='date-box'>
+                <p>Added on</p>
+                <p>{formattedDate}</p>
+              </span>
+            </div>
+          </div>
+          <div className='mt-3'>
+            <Link to={`/products/${specificProduct.id}/order`}>
+              <button className='details-order'>Order Now</button>
+            </Link>
           </div>
         </div>
       </div>
