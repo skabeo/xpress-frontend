@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../../redux/products/productSlice";
+import AddAddress from "./AddAddress";
 
 const OrderPage = () => {
   const products = useSelector((state) => state.product.products);
@@ -15,6 +16,7 @@ const OrderPage = () => {
   const dispatch = useDispatch();
   const storedUSerInfo = localStorage.getItem("USER_INFO");
   const parsedData = JSON.parse(storedUSerInfo);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   useEffect(() => {
     if (!Array.isArray(products)) {
@@ -29,8 +31,13 @@ const OrderPage = () => {
     setSelectedQuantity(parseInt(event.target.value, 10));
   };
 
-  const itemsPrice = parseFloat((specificProduct.price * selectedQuantity).toFixed(2));
-  const totalPrice = parseFloat((itemsPrice + specificProduct.batch.shipping_cost).toFixed(2));
+  let itemsPrice = 0;
+  let totalPrice = 0;
+
+  if (specificProduct !== null) {
+    itemsPrice = parseFloat((specificProduct.price * selectedQuantity).toFixed(2));
+    totalPrice = Math.ceil(itemsPrice + specificProduct.batch.shipping_cost);
+  }
 
   const config = {
     reference: (new Date()).getTime().toString(),
@@ -52,6 +59,14 @@ const OrderPage = () => {
     alert('Payment unsuccessfull')
     // console.log('closed')
   }
+
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
 
   if (specificProduct === null) {
     return (
@@ -86,7 +101,9 @@ const OrderPage = () => {
                 </div>
                 <div className="mt-2 px-2 text-sm mb-5">
                   <FontAwesomeIcon icon={faPlus} className="plus-icon" />
-                  <span className="pl-1">Add Address</span>
+                  <span className="pl-1 text-sm add-address">Add Address</span>
+                  <button onClick={openPopup}>Open Popup</button>
+                  {/* <AddAddress isOpen={popupOpen} closePopup={closePopup} /> */}
                 </div>
                 <button className="text-xs font-bold use-address-btn">Use this address</button>
               </div>
