@@ -16,7 +16,7 @@ const OrderPage = () => {
   const dispatch = useDispatch();
   const storedUSerInfo = localStorage.getItem("USER_INFO");
   const parsedData = JSON.parse(storedUSerInfo);
-  const [popupOpen, setPopupOpen] = useState(false);
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
   useEffect(() => {
     if (!Array.isArray(products)) {
@@ -95,15 +95,15 @@ const OrderPage = () => {
                   <input 
                     type="radio"
                     name="address"
+                    className="form-radio"
                     checked
                   />
                   <span className="text-xs">Spencer Okyere B1023/24 Obonu St, Accra, Ghana.<span>Edit address</span></span>
                 </div>
-                <div className="mt-2 px-2 text-sm mb-5">
+                <div className="mt-2 px-2 mb-5">
                   <FontAwesomeIcon icon={faPlus} className="plus-icon" />
-                  <span className="pl-1 text-sm add-address">Add Address</span>
-                  <button onClick={openPopup}>Open Popup</button>
-                  {/* <AddAddress isOpen={popupOpen} closePopup={closePopup} /> */}
+                  <span className="pl-1 text-sm add-address" onClick={openPopup}>Add Address</span>
+                  {isPopupOpen && <AddAddress onClose={closePopup} />}
                 </div>
                 <button className="text-xs font-bold use-address-btn">Use this address</button>
               </div>
