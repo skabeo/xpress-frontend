@@ -13,6 +13,8 @@ const OrderPage = () => {
   const products = useSelector((state) => state.product.products);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const storedUSerInfo = localStorage.getItem("USER_INFO");
+  const parsedData = JSON.parse(storedUSerInfo);
 
   useEffect(() => {
     if (!Array.isArray(products)) {
@@ -27,10 +29,13 @@ const OrderPage = () => {
     setSelectedQuantity(parseInt(event.target.value, 10));
   };
 
+  const itemsPrice = parseFloat((specificProduct.price * selectedQuantity).toFixed(2));
+  const totalPrice = parseFloat((itemsPrice + specificProduct.batch.shipping_cost).toFixed(2));
+
   const config = {
     reference: (new Date()).getTime().toString(),
-    email: "user@example.com",
-    amount: 35 * 100,
+    email: parsedData.email,
+    amount: totalPrice * 100,
     currency: 'GHS',
     publicKey: 'pk_test_d461aaaf7bbb3596e2967d2cd4fb2beeceb44bd5',
   };
@@ -47,9 +52,6 @@ const OrderPage = () => {
     alert('Payment unsuccessfull')
     // console.log('closed')
   }
-
-  const itemsPrice = specificProduct.price * selectedQuantity;
-  const totalPrice = itemsPrice + specificProduct.batch.shipping_cost;
 
   if (specificProduct === null) {
     return (
@@ -96,7 +98,7 @@ const OrderPage = () => {
                   <img src={slips} alt="image" className="items-img" />
                 </div>
                 <div>
-                  <p className='font-bold uppercase'>{specificProduct.name}</p>
+                  <p className='font-bold uppercase text-sm'>{specificProduct.name}</p>
                   <p className="items-desc text-sm">{specificProduct.description}</p>
                   <span className="text-sm block ship-title font-semibold">GH₵ {specificProduct.price}</span>
                   <select
