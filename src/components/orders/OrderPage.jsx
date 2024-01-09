@@ -92,12 +92,14 @@ const OrderPage = () => {
                 <p className="font-bold text-sm mb-1">Your address</p>
                 <hr />
                 <div className="radio-address">
-                  <input 
-                    type="radio"
-                    name="address"
-                    className="form-radio"
-                    checked
-                  />
+                  <div>
+                    <input 
+                      type="radio"
+                      name="address"
+                      className="flex"
+                      checked
+                    />
+                  </div>
                   <span className="text-xs">Spencer Okyere B1023/24 Obonu St, Accra, Ghana.<span>Edit address</span></span>
                 </div>
                 <div className="mt-2 px-2 mb-5">
