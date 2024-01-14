@@ -13,19 +13,21 @@
 
 .popup-content {
   background: #fff;
-  padding: 0 0 20px 0;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   width: 530px;
 }
 
-.close-button-container {
-
-  cursor: pointer;
+.popup-content div {
+  border-radius: 5px;
 }
 
-.close-button {
-  
+.popup-bottom-half {
+  padding: 20px;
+}
+
+.close-button-container {
+  cursor: pointer;
 }
 
 .form-container {
@@ -37,6 +39,16 @@
   margin-bottom: 15px;
 }
 
+.form-group input {
+  padding: 0 8px;
+  border-radius: 3px;
+}
+
+.form-group input:focus {
+  outline: 1px solid #f5e74d;
+  border: none;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
@@ -44,8 +56,9 @@ label {
 
 input {
   width: 100%;
-  padding: 8px;
+  height: 30px;
   margin-top: 4px;
+  border: 1px solid rgb(181, 181, 181);
 }
 
 button {
@@ -54,4 +67,17 @@ button {
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.submit-address {
+  padding: 4px 7px;
+  border-radius: 3px;
+  background-color: #f5e74d !important;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.submit-address:hover {
+  outline: 1px #f5e74d solid;
+  background-color: inherit !important;
 }
