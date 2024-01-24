@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../../redux/products/productSlice";
+import { fetchUserAddress } from "../../redux/user-address/userAddresSlice";
 import AddAddress from "./AddAddress";
 
 const OrderPage = () => {
@@ -21,6 +22,7 @@ const OrderPage = () => {
   useEffect(() => {
     if (!Array.isArray(products)) {
       dispatch(fetchProducts());
+      dispatch(fetchUserAddress());
     }
   }, [dispatch]);
 
