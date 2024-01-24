@@ -58,7 +58,7 @@
   border-radius: 3px;
   background-color: #f5e74d;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .use-address-btn:hover {
@@ -114,10 +114,20 @@
   cursor: pointer;
   width: 100%;
   font-weight: bold;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .place-order:hover {
   outline: 1px #f5e74d solid;
   background-color: inherit;
+}
+
+.add-address {
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.add-address:hover {
+  text-decoration: underline;
+  color: blue;
 }

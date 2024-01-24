@@ -14,7 +14,9 @@ const ProductDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    if (!Array.isArray(products)) {
+      dispatch(fetchProducts());
+    }
   }, [dispatch]);
 
   const specificProduct = Array.isArray(products) ? products.find(product => product.id === parseInt(id)) : null;

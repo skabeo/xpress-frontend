@@ -4,12 +4,47 @@ import './styles/order-page.css';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import slips from '../../assets/slips.jpg';
 import { usePaystackPayment } from "react-paystack";
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../../redux/products/productSlice";
+import { fetchUserAddress } from "../../redux/user-address/userAddresSlice";
+import AddAddress from "./AddAddress";
 
 const OrderPage = () => {
+  const products = useSelector((state) => state.product.products);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const storedUSerInfo = localStorage.getItem("USER_INFO");
+  const parsedData = JSON.parse(storedUSerInfo);
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  useEffect(() => {
+    if (!Array.isArray(products)) {
+      dispatch(fetchProducts());
+      dispatch(fetchUserAddress());
+    }
+  }, [dispatch]);
+
+  const specificProduct = Array.isArray(products) ? products.find(product => product.id === parseInt(id)) : null;
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+  const handleQuantityChange = (event) => {
+    setSelectedQuantity(parseInt(event.target.value, 10));
+  };
+
+  let itemsPrice = 0;
+  let totalPrice = 0;
+
+  if (specificProduct !== null) {
+    itemsPrice = parseFloat((specificProduct.price * selectedQuantity).toFixed(2));
+    totalPrice = Math.ceil(itemsPrice + specificProduct.batch.shipping_cost);
+  }
+
   const config = {
     reference: (new Date()).getTime().toString(),
-    email: "user@example.com",
-    amount: 35 * 100,
+    email: parsedData.email,
+    amount: totalPrice * 100,
     currency: 'GHS',
     publicKey: 'pk_test_d461aaaf7bbb3596e2967d2cd4fb2beeceb44bd5',
   };
@@ -27,12 +62,28 @@ const OrderPage = () => {
     // console.log('closed')
   }
 
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+
+  if (specificProduct === null) {
+    return (
+      <div>
+        <p>Product not found</p>
+      </div>
+    );
+  }
+
   return (
     <div className="order-page-container">
       <Sidebar />
       <div>
         <div className="order-page-heading">
-          <p>Checkout ( 1 item )</p>
+        <p>{`Checkout (${selectedQuantity} ${selectedQuantity === 1 ? 'item' : 'items'})`}</p>
         </div>
         <hr />
         <div className="order-page-section">
@@ -43,16 +94,20 @@ const OrderPage = () => {
                 <p className="font-bold text-sm mb-1">Your address</p>
                 <hr />
                 <div className="radio-address">
-                  <input 
-                    type="radio"
-                    name="address"
-                    checked
-                  />
+                  <div>
+                    <input 
+                      type="radio"
+                      name="address"
+                      className="flex"
+                      checked
+                    />
+                  </div>
                   <span className="text-xs">Spencer Okyere B1023/24 Obonu St, Accra, Ghana.<span>Edit address</span></span>
                 </div>
-                <div className="mt-2 px-2 text-sm mb-5">
+                <div className="mt-2 px-2 mb-5">
                   <FontAwesomeIcon icon={faPlus} className="plus-icon" />
-                  <span className="pl-1">Add Address</span>
+                  <span className="pl-1 text-sm add-address" onClick={openPopup}>Add Address</span>
+                  {isPopupOpen && <AddAddress onClose={closePopup} />}
                 </div>
                 <button className="text-xs font-bold use-address-btn">Use this address</button>
               </div>
@@ -64,9 +119,14 @@ const OrderPage = () => {
                   <img src={slips} alt="image" className="items-img" />
                 </div>
                 <div>
-                  <p className="items-desc text-sm">Lorem Lorem lorem lorem lorem ipsum lorem ipsum Lorem Lorem lorem lorem lorem ipsum lorem ipsum Lorem Lorem lorem lorem lorem ipsum lorem ipsum Lorem Lorem lorem lorem lorem ipsum lorem ipsum Lorem Lorem lorem lorem lorem ipsum lorem ipsum</p>
-                  <span className="text-sm block ship-title font-semibold">GHc 30.45</span>
-                  <select className="text-xs quantity-dropdown">
+                  <p className='font-bold uppercase text-sm'>{specificProduct.name}</p>
+                  <p className="items-desc text-sm">{specificProduct.description}</p>
+                  <span className="text-sm block ship-title font-semibold">GH₵ {specificProduct.price}</span>
+                  <select
+                    className="text-xs quantity-dropdown"
+                    value={selectedQuantity}
+                    onChange={handleQuantityChange}
+                  >
                     {[...Array(10)].map((_, index) => (
                       <option key={index + 1} value={index + 1}>
                         Qty: {index + 1}
@@ -82,16 +142,16 @@ const OrderPage = () => {
             <div>
               <span className="text-xs flex justify-between mb-1">
                 <p>Items:</p>
-                <p>GHc 35.00</p>
+                <p>GH₵ {itemsPrice}</p>
               </span>
               <span className="text-xs flex justify-between">
                 <p>Estimated Shipping:</p>
-                <p>GHc 35.00</p>
+                <p>GH₵ {specificProduct.batch.shipping_cost}</p>
               </span>
               <hr className="mt-1 hori-line" />
               <span className="flex justify-between font-bold mt-5">
                 <p className="order-total">Order Total:</p>
-                <p>GHc 35.00</p>
+                <p>GHc {totalPrice}</p>
               </span>
             </div>
             <button 
