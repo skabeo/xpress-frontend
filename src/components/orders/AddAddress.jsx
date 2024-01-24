@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './styles/add-address.css';
+import PropTypes from 'prop-types';
 
 const AddAddress = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ const AddAddress = ({ onClose }) => {
                   placeholder='0200123456'
                   value={formData.phoneNumber1}
                   onChange={handleChange}
-                  maxlength="10"
+                  maxLength="10"
                   required
                 />
               </label>
@@ -59,7 +60,7 @@ const AddAddress = ({ onClose }) => {
                   id="phoneNumber2"
                   name="phoneNumber2"
                   value={formData.phoneNumber2}
-                  maxlength="10"
+                  maxLength="10"
                   onChange={handleChange}
                 />
               </label>
@@ -100,6 +101,10 @@ const AddAddress = ({ onClose }) => {
       </div>
     </div>
   );
+};
+
+AddAddress.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AddAddress
