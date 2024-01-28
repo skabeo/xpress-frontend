@@ -28,6 +28,21 @@ export const fetchUserAddress = createAsyncThunk('userAddress/fetchUserAddress',
   }
 });
 
+export const postUserAddress = createAsyncThunk('userAddress/postUserAddress', async (data) => {
+  try {
+    const response = await axios.post(BASE_URL, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    console.log(response.data);
+    return response.data;
+  } catch(error) {
+    console.log(error);
+    return "Can't post user address";
+  }
+});
+
 const userAddressSlice = createSlice({
   name: 'userAddress',
   initialState,
