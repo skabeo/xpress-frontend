@@ -3,8 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './styles/add-address.css';
 import PropTypes from 'prop-types';
+import { postUserAddress } from '../../redux/user-address/userAddresSlice';
+import { useDispatch } from 'react-redux';
 
 const AddAddress = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const storedUSerInfo = localStorage.getItem("USER_INFO");
+  const parsedData = JSON.parse(storedUSerInfo);
   const [formData, setFormData] = useState({
     phoneNumber1: '',
     address: '',
@@ -17,10 +22,19 @@ const AddAddress = ({ onClose }) => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
+    const { phoneNumber1, address, city, phoneNumber2 } = formData;
+    const data = {
+      user_address: {
+        user_id: parsedData.id,
+        tel_line: phoneNumber1,
+        tel_line2: phoneNumber2,
+        address,
+        city
+      }
+    };
+    await dispatch(postUserAddress(data));
   };
 
   return (
