@@ -54,7 +54,7 @@ const AddAddress = ({ onClose }) => {
 
             <div className="form-group">
               <label htmlFor="phoneNumber2">
-                Phone Number
+                Phone Number (Optional)
                 <input
                   type="tel"
                   id="phoneNumber2"
