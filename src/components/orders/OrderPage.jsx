@@ -46,7 +46,7 @@ const OrderPage = () => {
     email: parsedData.email,
     amount: totalPrice * 100,
     currency: 'GHS',
-    publicKey: 'pk_test_d461aaaf7bbb3596e2967d2cd4fb2beeceb44bd5',
+    publicKey: import.meta.env.VITE_REACT_APP_PUBLIC_KEY,
   };
 
   const initializePayment = usePaystackPayment(config);
