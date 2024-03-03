@@ -3,8 +3,8 @@ import Sidebar from "../sidebar/Sidebar";
 import './styles/order-page.css';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import slips from '../../assets/slips.jpg';
-import { usePaystackPayment } from "react-paystack";
-import { useParams } from 'react-router-dom';
+import { PaystackButton } from "react-paystack";
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../../redux/products/productSlice";
@@ -18,6 +18,7 @@ const OrderPage = () => {
   const storedUSerInfo = localStorage.getItem("USER_INFO");
   const parsedData = JSON.parse(storedUSerInfo);
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!Array.isArray(products)) {
@@ -41,26 +42,21 @@ const OrderPage = () => {
     totalPrice = Math.ceil(itemsPrice + specificProduct.batch.shipping_cost);
   }
 
-  const config = {
-    reference: (new Date()).getTime().toString(),
+  const componentProps = {
     email: parsedData.email,
     amount: totalPrice * 100,
     currency: 'GHS',
+    metadata: {
+      name: parsedData.name,
+    },
     publicKey: import.meta.env.VITE_REACT_APP_PUBLIC_KEY,
+    text: "Place Order",
+    onSuccess: ({ reference }) => {
+      alert(`Your purchase was successful! Transaction reference: ${reference}`)
+      navigate('/');
+    },  
+    onClose: () => alert("Refresh and try again!"),
   };
-
-  const initializePayment = usePaystackPayment(config);
-
-  const onSuccess = (reference) => {
-    alert('Payment successful');
-    
-    console.log(reference);
-  };
-
-  const onClose = () => {
-    alert('Payment unsuccessfull')
-    // console.log('closed')
-  }
 
   const openPopup = () => {
     setPopupOpen(true);
@@ -154,12 +150,10 @@ const OrderPage = () => {
                 <p>GHc {totalPrice}</p>
               </span>
             </div>
-            <button 
+            <PaystackButton 
               className="place-order mt-7 text-sm"
-              onClick={() => {
-                initializePayment(onSuccess, onClose)
-              }}
-            >Place order</button>
+              {...componentProps} 
+            />
           </div>
         </div>
       </div>
@@ -167,4 +161,4 @@ const OrderPage = () => {
   )
 }
 
-export default OrderPage
+export default OrderPage;
